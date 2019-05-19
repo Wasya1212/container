@@ -22,191 +22,195 @@ app.use(async (ctx, next) => {
   ctx.set('X-Response-Time', `${ms}ms`);
 });
 
-router.get('/api/foresters', async (ctx, next) => {
-  ctx.body = db.foresters;
+router.get('/api/students', async (ctx, next) => {
+  ctx.body = db.students;
   await next();
 });
 
-router.post('/api/foresters', async (ctx, next) => {
-  const newForester = {
+router.post('/api/students', async (ctx, next) => {
+  const newStudent = {
     id: uuidv4(),
-    nickname: ctx.request.body.nickname
+    name: ctx.request.body.name
   };
 
-  db.foresters.push(newForester);
+  db.students.push(newStudent);
 
-  ctx.body = newForester;
+  ctx.body = newStudent;
 
   await next();
 });
 
-router.get('/api/foresters/:foresterId', async (ctx, next) => {
-  const id = parseInt(ctx.params.foresterId);
-  const forester = db.foresters.find((forester) => forester.id == id);
+router.get('/api/students/:studentId', async (ctx, next) => {
+  const id = parseInt(ctx.params.studentId);
+  const student = db.students.find((student) => student.id == id);
 
-  if (!forester) {
-    ctx.assert(ctx.request.accepts('xml'), 404, 'Forester not found!');
+  if (!student) {
+    ctx.assert(ctx.request.accepts('xml'), 404, 'Student not found!');
   } else {
-    ctx.body = forester;
+    ctx.body = student;
   }
 
   await next();
 });
 
-router.put('/api/foresters/:foresterId', async (ctx, next) => {
-  const id = parseInt(ctx.params.foresterId);
-  const index = db.foresters.findIndex((forester) => forester.id == id);
+router.put('/api/students/:studentId', async (ctx, next) => {
+  const id = parseInt(ctx.params.studentId);
+  const index = db.students.findIndex((student) => student.id == id);
 
   if (index == -1) {
-    ctx.assert(ctx.request.accepts('xml'), 404, 'Forester not found!');
+    ctx.assert(ctx.request.accepts('xml'), 404, 'Student not found!');
     return;
   }
 
-  if (ctx.request.body.nickname) {
-    db.foresters[index].nickname = ctx.request.body.nickname;
+  if (ctx.request.body.name) {
+    db.students[index].name = ctx.request.body.name;
   }
 
-  ctx.body = db.foresters[index];
+  ctx.body = db.students[index];
 
   await next();
 });
 
-router.delete('/api/foresters/:foresterId', async (ctx, next) => {
-  const id = parseInt(ctx.params.foresterId);
-  const index = db.foresters.findIndex((forester) => forester.id == id);
+router.delete('/api/students/:studentId', async (ctx, next) => {
+  const id = parseInt(ctx.params.studentId);
+  const index = db.students.findIndex((student) => student.id == id);
 
   if (index == -1) {
-    ctx.assert(ctx.request.accepts('xml'), 404, 'Forester not found!');
+    ctx.assert(ctx.request.accepts('xml'), 404, 'Student not found!');
   } else {
-    db.foresters.splice(index, 1);
-    ctx.body = `Forester ${ctx.params.foresterId} was deleted!`
+    db.students.splice(index, 1);
+    ctx.body = `Student ${ctx.params.studentId} was deleted!`
   }
 
   await next();
 });
 
-router.get('/api/supervisors', async (ctx, next) => {
-  ctx.body = db.supervisors;
+router.get('/api/teachers', async (ctx, next) => {
+  ctx.body = db.teachers;
   await next();
 });
 
-router.post('/api/supervisors', async (ctx, next) => {
-  const newSupervisor = {
+router.post('/api/teachers', async (ctx, next) => {
+  const newTeacher = {
     id: uuidv4(),
-    nickname: ctx.request.body.nickname
+    name: ctx.request.body.name
   };
 
-  db.supervisors.push(newSupervisor);
+  db.teachers.push(newTeacher);
 
-  ctx.body = newSupervisor;
+  ctx.body = newTeacher;
 
   await next();
 });
 
-router.get('/api/supervisors/:supervisorId', async (ctx, next) => {
-  const id = parseInt(ctx.params.supervisorId);
-  const supervisor = db.supervisors.find((supervisor) => supervisor.id == id);
+router.get('/api/teachers/:teacherId', async (ctx, next) => {
+  const id = parseInt(ctx.params.teacherId);
+  const teacher = db.teachers.find((teacher) => teacher.id == id);
 
-  if (!supervisor) {
-    ctx.assert(ctx.request.accepts('xml'), 404, 'Supervisor not found!');
-    console.log(supervisor)
+  if (!teacher) {
+    ctx.assert(ctx.request.accepts('xml'), 404, 'Teacher not found!');
+    console.log(teacher)
   } else {
-    ctx.body = supervisor;
+    ctx.body = teacher;
   }
 
   await next();
 });
 
-router.put('/api/supervisors/:supervisorId', async (ctx, next) => {
-  const id = parseInt(ctx.params.supervisorId);
-  const index = db.supervisors.findIndex((supervisor) => supervisor.id == id);
+router.put('/api/teachers/:teacherId', async (ctx, next) => {
+  const id = parseInt(ctx.params.teacherId);
+  const index = db.teachers.findIndex((teacher) => teacher.id == id);
 
   if (index == -1) {
-    ctx.assert(ctx.request.accepts('xml'), 404, 'Supervisor not found!');
+    ctx.assert(ctx.request.accepts('xml'), 404, 'Teacher not found!');
     return;
   }
 
-  if (ctx.request.body.nickname) {
-    db.supervisors[index].nickname = ctx.request.body.nickname;
+  if (ctx.request.body.name) {
+    db.teachers[index].name = ctx.request.body.name;
   }
 
-  ctx.body = db.supervisors[index];
+  ctx.body = db.teachers[index];
 
   await next();
 });
 
-router.delete('/api/supervisors/:supervisorId', async (ctx, next) => {
-  const id = parseInt(ctx.params.supervisorId);
-  const index = db.supervisors.findIndex((supervisor) => supervisor.id == id);
+router.delete('/api/teachers/:teacherId', async (ctx, next) => {
+  const id = parseInt(ctx.params.teacherId);
+  const index = db.teachers.findIndex((teacher) => teacher.id == id);
 
   if (index == -1) {
-    ctx.assert(ctx.request.accepts('xml'), 404, 'Supervisor not found!');
+    ctx.assert(ctx.request.accepts('xml'), 404, 'Teacher not found!');
   } else {
-    db.supervisors.splice(index, 1);
-    ctx.body = `Supervisor ${ctx.params.supervisorId} was deleted!`
+    db.teachers.splice(index, 1);
+    ctx.body = `Teacher ${ctx.params.supervisorId} was deleted!`
   }
 
   await next();
 });
 
-router.get('/api/tasks', async (ctx, next) => {
-  ctx.body = db.tasks;
+router.get('/api/tests', async (ctx, next) => {
+  ctx.body = db.tests;
   await next();
 });
 
-router.get('/api/tasks/by-forester/:foresterId', async (ctx, next) => {
-  const id = parseInt(ctx.params.foresterId);
-  ctx.body = db.tasks.filter((task) => task.forester == id);
+router.get('/api/tests/by-teacher/:teacherId', async (ctx, next) => {
+  const id = parseInt(ctx.params.teacherId);
+  ctx.body = db.tests.filter((test) => test.teacher == id);
   await next();
 });
 
-router.get('/api/tasks/by-supervisor/:supervisorId', async (ctx, next) => {
-  const id = parseInt(ctx.params.supervisorId);
-  ctx.body = db.tasks.filter((task) => task.supervisor == id);
-  await next();
-});
+router.post('/api/tests/by-teacher/:teacherId', async (ctx, next) => {
+  const teacherId = parseInt(ctx.params.teacherId);
 
-router.post('/api/tasks/by-supervisor/:supervisorId/to-forester/:foresterId', async (ctx, next) => {
-  const supervisorId = parseInt(ctx.params.supervisorId);
-  const foresterId = parseInt(ctx.params.foresterId);
-
-  const newTask = {
+  const newTest = {
     id: uuidv4(),
     title: ctx.request.body.title,
-    report: '',
-    forester: foresterId,
-    supervisor: supervisorId
+    subject: ctx.request.body.subject,
+    teacher: teacherId,
+    questions: JSON.parse(ctx.request.body.questions)
   };
 
-  db.tasks.push(newTask);
+  db.tests.push(newTest);
 
-  ctx.body = newTask;
+  ctx.body = newTest;
 
   await next();
 });
 
-router.put('/api/tasks/:taskId', async (ctx, next) => {
-  const index = db.tasks.findIndex(task => task.id == ctx.params.taskId);
+router.put('/api/tests/:testId', async (ctx, next) => {
+  const index = db.tests.findIndex(test => test.id == ctx.params.testId);
 
   if (index == -1) {
-    ctx.assert(ctx.request.accepts('xml'), 404, 'Task not found!');
+    ctx.assert(ctx.request.accepts('xml'), 404, 'Test not found!');
   } else {
-    db.tasks[index].report = ctx.request.body.report;
-    ctx.body = db.tasks[index];
+    try {
+      delete ctx.request.body.id;
+
+      if (ctx.request.body.questions) {
+        ctx.request.body.questions = JSON.parse(ctx.request.body.questions);
+      }
+
+      db.tests[index] = Object.assign(db.tests[index], ctx.request.body);
+    } catch (e) {
+      ctx.assert(ctx.request.accepts('xml'), 500, 'Internal server error!');
+    } finally {
+      ctx.body = db.tests[index];
+    }
   }
 
   await next();
 });
 
-router.delete('/api/tasks/:taskId', async (ctx, next) => {
+router.delete('/api/tests/:testId', async (ctx, next) => {
   const id = parseInt(ctx.params.taskId);
-  const index = db.tasks.findIndex((task) => task.id == id);
+  const index = db.tests.findIndex((test) => test.id == id);
 
   if (index == -1) {
-    ctx.assert(ctx.request.accepts('xml'), 404, 'Task not found!');
+    ctx.assert(ctx.request.accepts('xml'), 404, 'Test not found!');
   } else {
-    db.tasks.splice(index, 1);
-    ctx.body = `Task ${ctx.params.taskId} was deleted!`
+    db.tests.splice(index, 1);
+    ctx.body = `Test ${ctx.params.taskId} was deleted!`
   }
 
   await next();

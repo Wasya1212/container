@@ -1,23 +1,54 @@
 {
-  "foresters": [
+  "students": [
     {
       "id": 1,
-      "nickname": "Сифон"
+      "name": "учень"
     }
   ],
-  "supervisors": [
+  "teachers": [
     {
       "id": 1,
-      "nickname": "Борода"
+      "name": "учитель"
     }
   ],
-  "tasks": [
+  "tests": [
     {
       "id": 1,
-      "title": "посадить цветы",
-      "report": "цветы посажены",
-      "forester": 1,
-      "supervisor": 1
+      "title": "простий тест",
+      "teacher": 1,
+      "subject": "теорія прийняття рішень",
+      "questions": [
+        {
+          "title": "Як звати викладача?",
+          "answers": [
+            {
+              "text": "Вова",
+              "correct": false
+            },
+            {
+              "text": "учитель",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "title": "Як називається предмет?",
+          "answers": [
+            {
+              "text": "біологія",
+              "correct": false
+            },
+            {
+              "text": "теорія прийняття рішень",
+              "correct": true
+            },
+            {
+              "text": "ТПР",
+              "correct": true
+            }
+          ]
+        }
+      ]
     }
   ]
 }

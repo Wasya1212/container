@@ -1,0 +1,23 @@
+{
+  "foresters": [
+    {
+      "id": 1,
+      "nickname": "Сифон"
+    }
+  ],
+  "supervisors": [
+    {
+      "id": 1,
+      "nickname": "Борода"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "посадить цветы",
+      "report": "цветы посажены",
+      "forester": 1,
+      "supervisor": 1
+    }
+  ]
+}

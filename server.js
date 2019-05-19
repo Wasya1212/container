@@ -203,14 +203,14 @@ router.put('/api/tests/:testId', async (ctx, next) => {
 });
 
 router.delete('/api/tests/:testId', async (ctx, next) => {
-  const id = parseInt(ctx.params.taskId);
+  const id = parseInt(ctx.params.testId);
   const index = db.tests.findIndex((test) => test.id == id);
 
   if (index == -1) {
     ctx.assert(ctx.request.accepts('xml'), 404, 'Test not found!');
   } else {
     db.tests.splice(index, 1);
-    ctx.body = `Test ${ctx.params.taskId} was deleted!`
+    ctx.body = `Test ${ctx.params.testId} was deleted!`
   }
 
   await next();
